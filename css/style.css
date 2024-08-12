@@ -354,7 +354,7 @@ body {
     padding-block: 100px 80px;
     display: grid;
     place-items: center;
-    background-image: url(/img/turbo-bg.jpg);
+    background-image: url(../img/turbo-bg.jpg);
     min-height: 400px;
 
     &::before {
