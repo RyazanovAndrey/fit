@@ -64,10 +64,10 @@ body {
     &:hover {
         background-color: #ffd745;
     }
+}
 
-    .btn-show {
-        margin-top: auto;
-    }
+.btn-show {
+    margin-top: auto;
 }
 
 .popup {
