@@ -9,6 +9,11 @@
 
     --font-family: "Roboto", sans-serif;
     --second-family: "Sarina", sans-serif;
+
+    --desktop: 1200px;
+    --laptop: 992px;
+    --tablet: 768px;
+    --mobile: 576px;
 }
 
 html {
@@ -22,7 +27,20 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+
+    @media(max-width: 1200px) {
+        max-width: var(--laptop);
+    }
+
+    @media(max-width: 992px) {
+        max-width: var(--tablet);
+    }
+
+    @media(max-width: 768px) {
+        max-width: var(--mobile);
+    }
+
+    max-width: var(--desktop);
     padding-inline: 10px;
     margin: 0 auto;
 }
@@ -45,6 +63,10 @@ body {
 
     &:hover {
         background-color: #ffd745;
+    }
+
+    .btn-show {
+        margin-top: auto;
     }
 }
 
@@ -118,6 +140,7 @@ body {
     right: 20px;
     bottom: 20px;
     display: none;
+    z-index: 99;
 
     &.show {
         display: block;
@@ -126,6 +149,37 @@ body {
 
 .header-stop {
     padding-right: 17px;
+}
+
+/* Burger */
+
+.burger {
+    cursor: pointer;
+    display: none;
+
+    @media(max-width: 1100px) {
+        display: block;
+    }
+
+    .burger-true {
+        display: none;
+    }
+}
+
+.burger-true:checked + .fa-bars {
+    display: none;
+}
+
+.burger-true:checked ~ .fa-xmark {
+    display: block;
+}
+
+.fa-solid {
+    font-size: 30px;
+}
+
+.burger .fa-xmark {
+    display: none;
 }
 
 /* Header */
@@ -149,6 +203,10 @@ body {
         display: flex;
         gap: 60px;
 
+        @media(max-width: 1100px) {
+            display: none;
+        }
+
         .link {
             color: var(--color-4);
             font-size: 18px;
@@ -168,59 +226,6 @@ body {
     }
 }
 
-.slider-demo {
-
-    position: relative;
-
-    .swiper-pagination {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        width: 100%;
-        z-index: 99;
-        display: flex;
-        gap: 50px;
-
-        .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background-color: rgb(95, 95, 95);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .swiper-pagination-bullet.swiper-pagination-bullet-active {
-            background-color: var(--color-1);
-        }
-    }
-
-    .swiper-slide {
-        min-height: 800px;
-        display: grid;
-        place-items: center;
-
-        .slider-demo-wrapper {
-            text-align: center;
-        }
-
-        .slider-demo-title {
-            font-size: 135px;
-            color: var(--color-4);
-            font-family: var(--second-family);
-        }
-    }
-
-    .swiper {
-        width: 100%;
-        min-height: 800px;
-        overflow: hidden;
-
-        .swiper-wrapper {
-            display: inline-flex;
-        }
-    }
-}
-
 /* Home */
 
 .home {
@@ -228,6 +233,7 @@ body {
     background-image: url(../img/home-bg.jpg);
     background-size: cover;
     min-height: 800px;
+    background-position: center;
 
     .home-wrapper {
         position: absolute;
@@ -237,6 +243,11 @@ body {
         transform: translate(-50%,-50%);
     
         .home-title {
+
+            @media(max-width: 576px) {
+                font-size: 80px;
+            }
+
             font-size: 135px;
             color: var(--color-4);
             font-family: var(--second-family);
@@ -271,10 +282,24 @@ body {
     }
 
     .card-wrapper {
+
+        @media(max-width: 992px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media(max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media(max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
+
         margin-top: 80px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
+        justify-items: center;
     }
 }
 
@@ -329,11 +354,17 @@ body {
     padding-block: 100px 80px;
     display: grid;
     place-items: center;
+    background-image: url(/img/turbo-bg.jpg);
+    min-height: 400px;
+
+    &::before {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(27, 33, 43, 0.9);
+        content: '';
+    }
 
     img {
-        top: 0;
-        left: 0;
-        z-index: -1;
         opacity: 0.1;
     }
 
@@ -383,6 +414,19 @@ body {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
+        justify-items: center;
+
+        @media(max-width: 992px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media(max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media(max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
     }
 
     .trainer-card {
@@ -465,10 +509,21 @@ body {
         margin-top: 80px;
         display: grid;grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+        justify-items: center;
+
+        @media(max-width: 992px) {
+            display: grid;grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media(max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
     }
 
     .subscription-card {
         border: 1px solid var(--color-1);
+        display: flex;
+        flex-direction: column;
 
         .subscription-box-card {
             text-align: center;
@@ -500,26 +555,39 @@ body {
                 justify-content: space-between;
                 align-items: center;
                 font-size: 16px;
+                padding-block: 10px;
             }
         }
 
-        .subscription-list * {
-            margin-top: 20px;
-        }
+
+
+
     }
 }
 
 /* Contact */
 
 .contact {
-
     position: relative;
     padding-block: 60px;
     min-height: 650px;
+    background-image: url(../img/contact-bg.jpg);
+
+    &::before {
+        position: absolute;
+        content: '';
+        inset: 0;
+        background-color: rgba(27, 33, 43, 0.9);
+    }
 
     .contact-wrapper {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+
+        @media(max-width: 992px) {
+            grid-template-columns: 1fr;
+        }
     }
 
     img {
@@ -566,6 +634,12 @@ body {
     padding-block: 20px;
 
     .footer-wrapper {
+
+        @media(max-width: 576px) {
+            flex-direction: column;
+            row-gap: 20px;
+        }
+        
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -653,6 +727,7 @@ body {
 .menu-color {
     background-color: var(--color-2);
 }
+
 
 
 
