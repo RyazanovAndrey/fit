@@ -110,8 +110,3 @@ btnShow.forEach(item => {
         document.body.style.paddingRight = currentPad
     })
 })
-
-
-
-
-
